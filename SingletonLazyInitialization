@@ -1,0 +1,30 @@
+package SingletonLazy;
+
+public class SingletonLazy {
+	private SingletonLazy() {}
+	private static volatile SingletonLazy INSTANCE;
+	
+	public static SingletonLazy getInstance() {
+		if(INSTANCE==null){
+			synchronized (SingletonLazy.class) {
+				if(INSTANCE==null) {
+					INSTANCE=new SingletonLazy();
+				}
+			}
+		}
+		return INSTANCE;
+	}
+}
+
+
+package SingletonLazy;
+
+public class SingletonLazyClient {
+
+	public static void main(String[] args) {
+		SingletonLazy instance1=SingletonLazy.getInstance();
+		SingletonLazy instance2=SingletonLazy.getInstance();
+		System.out.println(instance1==instance2);
+	}
+
+}
