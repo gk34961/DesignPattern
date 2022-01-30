@@ -1,0 +1,22 @@
+package SingletonEager;
+
+public class EagerRegistry {
+
+	private EagerRegistry(){}
+	private static final EagerRegistry INSTANCE=new EagerRegistry();
+	public static EagerRegistry getInstance() {
+		return INSTANCE;
+	}
+}
+
+package SingletonEager;
+
+public class SingletonPatternClient{
+
+	public static void main(String[] args) {
+		EagerRegistry registry1=EagerRegistry.getInstance();
+		EagerRegistry registry2=EagerRegistry.getInstance();
+		System.out.println(registry1==registry2);
+	}
+
+}
