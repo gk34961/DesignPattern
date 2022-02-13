@@ -1,0 +1,135 @@
+package SimpleFactory;
+
+import java.time.LocalDateTime;
+
+public abstract class Post {
+
+	private Long id;
+	private String title;
+	private String content;
+	private LocalDateTime createdOn;
+	private LocalDateTime publishedOn;
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public LocalDateTime getCreatedOn() {
+		return createdOn;
+	}
+	public void setCreatedOn(LocalDateTime createdOn) {
+		this.createdOn = createdOn;
+	}
+	public LocalDateTime getPublishedOn() {
+		return publishedOn;
+	}
+	public void setPublishedOn(LocalDateTime publishedOn) {
+		this.publishedOn = publishedOn;
+	}
+}
+========================================================================================================================
+package SimpleFactory;
+
+public class BlogPost extends Post {
+
+	private String author;
+	private String[] tags;
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public String[] getTags() {
+		return tags;
+	}
+	public void setTags(String[] tags) {
+		this.tags = tags;
+	}
+}
+
+=======================================================================================================================
+package SimpleFactory;
+
+import java.time.LocalDate;
+
+public class NewsPost extends Post{
+
+	private String headline;
+	private LocalDate newsTime;
+	public String getHeadline() {
+		return headline;
+	}
+	public void setHeadline(String headline) {
+		this.headline = headline;
+	}
+	public LocalDate getNewsTime() {
+		return newsTime;
+	}
+	public void setNewsTime(LocalDate newsTime) {
+		this.newsTime = newsTime;
+	}	
+}
+========================================================================================================================
+package SimpleFactory;
+
+public class ProductPost extends Post{
+
+	private String imageUrl;
+	private String name;
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+}
+
+=========================================================================================================================
+package SimpleFactory;
+
+public class PostFactory {
+	public static Post createPost(String type) {
+		switch(type) {
+		case "blog":
+			return new BlogPost();
+		case "news":
+			return new NewsPost();
+		case "product":
+			return new ProductPost();
+		default:
+			throw new IllegalArgumentException("Post type is unknown");
+		}
+	}
+}
+========================================================================================================================
+package SimpleFactory;
+
+public class Client {
+
+	public static void main(String[] args) {
+		Post post=PostFactory.createPost("news");
+		System.out.println(post);
+	}
+}
